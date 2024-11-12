@@ -1,0 +1,45 @@
+<%- include('../partials/head') %> <%- include('../partials/navbar') %>
+
+<div class="row my-5">
+  <div class="col-6">
+    <h1 class="text-center">All students <%= students.length %></h1>
+  </div>
+  <div class="col-6 d-flex justify-content-end align-items-center">
+    <a class="btn btn-danger me-2" href="students/create">Add New Student</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% students.forEach(student => { %>
+          <tr>
+            <td><%= student.first_name %></td>
+            <td><%= student.last_name %></td>
+            <td><%= student.email %></td>
+            <td>
+              <a
+                class="btn btn-primary me-2"
+                href="students/show/<%= student.student_id %>"
+                >Profile</a
+              >
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/bottom') %>

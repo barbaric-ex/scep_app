@@ -1,0 +1,88 @@
+<%- include('../partials/head') %> <%- include('../partials/navbar') %>
+
+<div class="row">
+  <div class="col-6">
+    <h1 class="text-center"><%= student.first_name %> profile</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 ">
+      <div class="row alert alert-info">
+        <h3><%= student.first_name %> <%= student.last_name %></h3>
+      </div>
+
+      <div class="row alert alert-info">
+        <h6><%= student.email %></h6>
+      </div>
+
+        <div class="row alert alert-warning">
+          <h3>Prijavljeni kursevi</h3> 
+
+        <% for (let i = 0; i < enrollments.length; i++) { %>
+          <div class="col-4">
+            <div class="card">
+              <div class="card-body">
+                <p><%= enrollments[i].title  %></p>
+              </div>
+            </div>
+             </div>
+        <% } %>
+      </div>
+      
+       
+
+
+      </div>
+
+      <div class="row alert alert-primary">
+    <h3>Uplaćeni kursevi</h3>
+
+        <% for( let i = 0; i < payments.length; i++ ) { %>
+          <button class="btn btn-outline-success form-control my-2">
+               <%= payments[i].title %> - <%= payments[i].amount %> KM
+          </button>
+        <% } %>
+       
+      </div>
+
+      <div class="row">
+        <div class="col-6 alert alert-info">
+          <h4>Izaberi kurs</h4>
+          <form action="/enrollments/store" method="post">
+            <select name="course_id" class="form-control">
+              <% for (let i = 0; i < displayCourses.length; i++) { %>
+                
+               
+                    <option value="<%= displayCourses[i].course_id %>"><%= displayCourses[i].title %></option>
+                
+              <% } %>
+            </select>
+            <input type="hidden" name="student_id" value="<%= student.student_id %>" />
+            <button class="btn btn-danger btn-sm my-2">
+              Add Course
+            </button>
+          </form>
+        </div>
+        
+        <div class="col-6">
+          <h4>Uplati kurs</h4>
+          <form action="/payments/store" method="post">
+            <input type="hidden" name="student_id" value="<%= student.student_id %>" />
+            
+            <select name="course_id" class="form-control mb-2">>
+              <% for (let i = 0; i < enrollments.length; i++) { %>
+                <option value="<%= enrollments[i].course_id %>"><%= enrollments[i].title %></option>
+              <% } %>
+            </select>
+            <input type="text" name="amount" class="form-control" placeholder="Amount" />
+            <button class="btn btn-success btn-sm my-2">Add Payment</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/bottom') %>

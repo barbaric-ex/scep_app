@@ -1,0 +1,18 @@
+<%- include('../partials/head') %> <%- include('../partials/navbar') %>
+
+<div class="row">
+  <div class="col-6">
+    <h1>Create course</h1>
+  </div>
+  <div class="col-6 offset-3">
+    <form action="/courses/store" method="POST">
+      <div class="mb-3">
+        <input type="text" class="form-control"  name="title" placeholder="First title" required><br>
+        <input type="text" class="form-control"  name="instructor" placeholder="instructor" required><br>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
+
+<%- include('../partials/bottom') %>
